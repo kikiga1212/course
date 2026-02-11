@@ -22,5 +22,7 @@ public class EnrollmentDTO {
 
     private Long courseId;//과목번호
     private String courseTitle;//과목명
+    private int credit;//학점
+    private String professor;//담당교수
 
 }
