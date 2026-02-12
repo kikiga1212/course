@@ -79,13 +79,16 @@ public class EnrollmentService {
     }
 
     //삭제
-    public boolean deleteEnrollment(Long enrollmentId){
+    public boolean cancelEnrollment(Long enrollmentId){
         if(enrollmentRepository.existsById(enrollmentId)){
             enrollmentRepository.deleteById(enrollmentId);
             return true;//삭제성공
         }
         return false;
     }
+
+
+
 
 
 

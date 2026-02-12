@@ -20,7 +20,7 @@ public class StudentService {
     //메소드체이닝 : 메소드와 메소드를 .으로 연결해서 연속적인 처리
     //.앞에 메소드를 결과를 .뒤에 메소드에 전달
     //전체조회
-    public List<StudentDTO> getStudents(){
+    public List<StudentDTO> getAllStudents(){
         return studentRepository.findAll()
                 .stream()
                 .map(this::mapToDTO)
