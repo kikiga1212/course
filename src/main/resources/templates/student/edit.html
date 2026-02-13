@@ -75,8 +75,44 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Dashboard</h1>
-                <p>학생, 강의, 수강신청 관리를 선택하세요.</p>
+                <!--제목-->
+                <div class="page-header mb-4">
+                    <h1><i class="fas fa-user-edit me-2"></i>학생 수정</h1>
+                    <p>학생 정보를 수정합니다.</p>
+                </div>
+                <!--수정 폼-->
+                <form th:action="@{'/students/edit/'+${student.id}}"
+                th:object="${student}" method="post">
+                    <div class="mb-3"><!--제목, 입력폼-->
+                        <label class="form-label">
+                            <i class="fas fa-user me-1"></i>이름<span class="text-danger">*</span>
+                        </label>
+                        <input type="text" class="form-control" th:field="*{name}" required>
+                        <div class="form-text">
+                            <i class="fas fa-lightbulb me-1"></i>실명을 정확하게 입력하세요.
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">
+                            <i class="fas fa-envelope me-1"></i>이메일 <span class="text-danger">*</span>
+                        </label>
+                        <input type="email" class="form-control" th:field="*{email}" required>
+                        <div class="form-text">
+                            <i class="fas fa-lightbulb me-1"></i>개인이나 학교 이메일을 입력하세요.
+                        </div>
+                    </div>
+                    <!--동작버튼-->
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-check me-1"></i>수정하기
+                        </button>
+                        <a th:href="@{/students}" class="btn btn-secondary">
+                            <i class="fas fa-times me-1"></i>취소
+                        </a>
+
+                    </div>
+                </form>
+
             </div>
         </main>
         <footer class="py-4 bg-light mt-auto">

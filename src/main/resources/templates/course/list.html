@@ -75,8 +75,93 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Dashboard</h1>
-                <p>학생, 강의, 수강신청 관리를 선택하세요.</p>
+                <!--제목-->
+                <div class="page-header">
+                    <h1>
+                        <span class="icon-shape">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </span>강의과목
+                    </h1>
+                    <p>등록된 강의 정보를 조회하고 관리할 수 있습니다.</p>
+                </div>
+
+                <!--수강과목 목록-->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div><!--등록버튼-->
+                        <a class="btn btn-primary" th:href="@{/courses/new}">
+                            <i class="fas fa-plus me-2"></i>강의 등록
+                        </a>
+                        <button class="btn btn-outline-secondary ms-2">
+                            <i class="fas fa-download me-2"></i>엑셀 다운로드
+                        </button>
+                    </div>
+                    <div><!--등록갯수-->
+                        <i class="fas fa-book me-2"></i>
+                        총 <strong th:text="${#lists.size(courses)}">0</strong> 개
+                    </div>
+                </div>
+                <!--수강과목 목록-->
+                <div class="table-container">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead>
+                            <tr>
+                                <th style="width: 80px">
+                                    <i class="fas fa-hashtag me-1"></i>ID
+                                </th>
+                                <th>
+                                    <i class="fas fa-book-open me-1"></i>과목명
+                                </th>
+                                <th style="width: 100px" class="text-center">
+                                    <i class="fas fa-star me-1"></i>학점
+                                </th>
+                                <th style="width: 150px">
+                                    <i class="fas fa-user-tie me-1"></i>교수
+                                </th>
+                                <th style="width: 130px" class="text-center">
+                                    <i class="fas fa-users me-1"></i>수강학생
+                                </th>
+                                <th style="width: 250px" class="text-center">
+                                    <i class="fas fa-tools me-1"></i>관리
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="course : ${courses}">
+                                <td>
+                                    <span class="badge bg-light text-dark" th:text="${course.id}">1</span>
+                                </td>
+                                <td>
+                                    <strong th:text="${course.title}">자료구조</strong>
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge bg-primary" th:text="${course.credit}">3</span>
+                                </td>
+                                <td th:text="${course.professor}">
+                                    김교수
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge bg-secondary" th:text="${course.enrolmentCount}">3</span>
+                                </td>
+                                <td>
+                                    <div class="action-buttons justify-content-center">
+                                        <a class="btn btn-sm btn-info" th:href="@{'/courses/edit/'+${course.id}}">
+                                            <i class="fas fa-edit me-1"></i>수정
+                                        </a>
+                                        <a class="btn btn-sm btn-danger" th:href="@{'/courses/delete/'+${course.id}}"
+                                        onclick="return confirm('정말 삭제하시나요?');">
+                                            <i class="fas fa-trash me-1"></i>삭제
+                                        </a>
+
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
             </div>
         </main>
         <footer class="py-4 bg-light mt-auto">

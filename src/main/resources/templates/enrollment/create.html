@@ -75,8 +75,80 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Dashboard</h1>
-                <p>학생, 강의, 수강신청 관리를 선택하세요.</p>
+                <div class="page-header mb-4">
+                    <h1>
+                       <i class="fas fa-clipboard-check"></i> 수강신청 등록
+                    </h1>
+                    <p>새로운 수강신청 정보를 등록합니다.</p>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="alert alert-info d-flex align-items-center mb-4" role="alert">
+                            <i class="fas fa-info-cliclr me-2"></i>
+                            모든 항목은 필수 입력사항입니다. 정확한 정보를 입력해주세요.
+                        </div>
+                        <form th:action="@{/enrollments/new}" method="post" th:object="${enrollment}">
+                            <div class="mb-3"><!--학생-->
+                                <label class="form-label">
+                                    <i class="fas fa-user-graduate"></i>학생
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select class="form-select" th:field="*{studentId}">
+                                    <option value="">학생을 선택하세요.</option>
+                                    <option th:each="student:${students}" th:value="${student.id}"
+                                    th:text="${student.name}"><!--학생명단-->
+
+                                    </option>
+                                </select>
+                                <div class="form-text">
+                                    <i class="fas fa-lightbulb"></i>수강신청할 학생을 선택해주세요.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">
+                                    <i class="fas fa-book-open"></i>강의
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select class="form-select" th:field="*{courseId}">
+                                    <option value="">강의를 선택하세요</option>
+                                    <option th:each="course:${courses}" th:value="${course.id}"
+                                    th:text="${course.title}">
+                                    </option>
+                                </select>
+                                <div class="form-text">
+                                    <i class="fas fa-lightbulb"></i>수강할 강의를 선택해주세요.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">
+                                    <i class="fas fa=calendar"></i>수강일
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="date" class="form-control" th:filed="*{enrollDate}">
+                                <div class="form-text">
+                                    <i class="fas fa-lightbulb"></i>수강신청 날자를 선택해 주세요.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">
+                                    <i class="fas fa-chart-line"></i>성적
+                                </label>
+                                <input type="number" class="form-control" th:field="*{score}">
+                                <div class="form-text">
+                                    <i class="fas fa-lightbulb"></i> 성적은 0~100사이의 숫자를 입력해주세요.
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i>등록하기
+                                </button>
+                                <a class="btn btn-secondary" th:href="@{/enrollments/list}">
+                                    <i class="far fa-times"></i>취소
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </main>
         <footer class="py-4 bg-light mt-auto">
